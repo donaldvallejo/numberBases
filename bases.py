@@ -54,10 +54,10 @@ def encode(number, base):
     new_number = number
     final_digits = "" 
     while new_number != 0:
-        print("divisor", new_number)
         new_number = new_number // base
-        print("remainder", remainder)
+        print("divisor", new_number)
         remainder = new_number % base
+        print("remainder", remainder)
         final_digits += str(remainder)
     # print(final_digits)
     return final_digits[::-1]
