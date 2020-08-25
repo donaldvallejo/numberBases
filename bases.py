@@ -51,13 +51,17 @@ def encode(number, base):
 #while
     #divisor = number / base
     # remainder = ??
-    new_number = number
-    final_digits = "" 
+    digits_and_letters = string.digits + string.ascii_letters 
+    print(digits_and_letters)
+    new_number = numbers
+    final_digits = ""
     while new_number != 0:
+        remainder = new_number % base
+        if base == 16:
+            remainder = digits_and_letters[remainder]
+        print("remainder", remainder)
         new_number = new_number // base
         print("divisor", new_number)
-        remainder = new_number % base
-        print("remainder", remainder)
         final_digits += str(remainder)
     # print(final_digits)
     return final_digits[::-1]
@@ -69,6 +73,10 @@ def encode(number, base):
     # TODO: Encode number in any base (2 up to 36)
     # ...
 
+string.digits + string.ascii_letters 
+new_number = numbers
+final_digits = ""
+while new_number != 0:
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -107,4 +115,5 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(encode(12, 2))
+    print(encode(12, 2)) # expect to see 1100
+    print(encode(64206, 16)) # face
