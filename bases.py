@@ -51,12 +51,17 @@ def encode(number, base):
 #while
     #divisor = number / base
     # remainder = ??
-    new_number = number 
+    new_number = number
+    final_digits = "" 
     while new_number != 0:
+        print("divisor", new_number)
         new_number = new_number // base
-        print(new_number)
+        print("remainder", remainder)
         remainder = new_number % base
-        print(remainder)
+        final_digits += str(remainder)
+    # print(final_digits)
+    return final_digits[::-1]
+
     # TODO: Encode number in binary (base 2)
     # ...
     # TODO: Encode number in hexadecimal (base 16)
@@ -101,4 +106,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(encode(12, 2))
