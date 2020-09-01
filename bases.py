@@ -17,45 +17,25 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    return int(digits, base)
-    # TODO: Decode digits from binary (base 2)
-    # TODO: Decode digits from hexadecimal (base 16)
-    # TODO: Decode digits from any base (2 up to 36)
-    # digits = int(digits)
-    # result = 0
-    # exponent = 0
-    # if base == 2:
-    #     '''
-    #     while digits > 0:
-    #         result += base ** exponent * (digits % 10)
-    #         digits //= 10
-    #         power += 1
-    #     return result
 
-    #     '''
-    #     return int(digits, base)
-    # elif base == 16:
-    #     '''
-    #     while digits > 0:
-    #         result += base ** exponent * (digits % 16)
-    #         digits //= 16
-    #         power += 1
-    #     return result
-    #     '''
-    #     return int(digits, base)
-    # else:
-    #     return int(digits, base)
-    #     '''
-    #     string = string[::-1]
-    #     decimal_num = 0
-    #     for exponent in range(len(string)):
-    #         single_num = string[exponent]
-    #         if single_num.isdigit():
-    #             single_num = int(single_num)
-    #         else:
-    #             single_num = ord(single_num()) - ord('A') + 10
-    #         decimal_num += single_num * (base ** exponent)
-    #     '''
+    # digits_and_letters = string.digits + string.ascii_letters 
+
+    digits = digits[::-1]
+    sum = 0
+    for i in range(len(digits)):
+        # result = int(digits[i]) * base ** i
+        ind = '0123456789abcdef'.index(digits[i])
+        #print("inddddd:::::::",ind)
+        result = ind * base ** i
+        sum += result
+    return sum
+
+    # TODO: Decode digits from binary (base 2)
+    # ...
+    # TODO: Decode digits from hexadecimal (base 16)
+    # ...
+    # TODO: Decode digits from any base (2 up to 36)
+    # ...
 
 
 def encode(number, base):
@@ -67,29 +47,35 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    '''
-    digits = digits[::-1]
-    decimal_num = 0
-    for i in range(len(digits)):
-        digit = digits[i]
-        digit = int(digit)
-        decimal_num += digit * base ** 1
-    return decimal_num
-    '''
-    new_num = ""
-    while number > 0:
-        temp = int(number%base)
-        if temp < 10:
-            new_num += str(temp)
-        else:
-            new_num += chr(ord('a') + temp -10)
-        number //= base
-    
-    new_num = new_num[::-1]
-    return new_num
-    
 
+# loop to do the repeated division
+# get the remainders and divisors
+# save the remainders
+# return the final number result as a string
+# somehow deal with hex digits
 
+#while
+    #divisor = number / base
+    # remainder = ??
+    digits_and_letters = string.digits + string.ascii_letters 
+    # print(digits_and_letters)
+    new_number = number
+    final_digits = ""
+    while new_number != 0:
+        remainder = new_number % base
+        if base == 16:
+            remainder = digits_and_letters[remainder]
+        # print("remainder", remainder)
+        new_number = new_number // base
+        # print("divisor", new_number)
+        final_digits += str(remainder)
+    # print(final_digits)
+    return final_digits[::-1]
+
+# string.digits + string.ascii_letters 
+# new_number = numbers
+# final_digits = ""
+# while new_number != 0:
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -100,12 +86,23 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    old_string = decode(digits, base1)
-    new_string = encode(int(old_string), base2)
-    return new_string
-    
-    
+    # TODO: Convert digits from base 2 to base 16 (and vice versa)
+    # ...
+    # TODO: Convert digits from base 2 to base 10 (and vice versa)
+    # ...
+    # TODO: Convert digits from base 10 to base 16 (and vice versa)
+    # ...
+    # TODO: Convert digits from any base to any base (2 up to 36)
+    # ...
+    base10result = decode(digits, base1)
+    finalresult = encode(base10result, base2)
+    return finalresult
 
+    # string = decode(digits, base1)
+    # return encode(int(string), base2)
+
+print(convert("1000", 2, 16))
+# print(finalresult)
 
 def main():
     """Read command-line arguments and convert given digits between bases."""
@@ -123,5 +120,10 @@ def main():
         print('Converts digits from base1 to base2')
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
+    # print(encode(12, 2)) # expect to see 1100
+    # print(encode(64206, 16)) # face
+
+    print(convert("101", 2, 16))
+    print(convert("1010", 2, 16))
